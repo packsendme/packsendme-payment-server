@@ -13,23 +13,15 @@ public class PaymentMethodModel implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	private String id;
-	private String name;
+	private String namePayMethod;
 	private String status;
 	
 	
-	public String getId() {
-		return id;
+	public String getNamePayMethod() {
+		return namePayMethod;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNamePayMethod(String namePayMethod) {
+		this.namePayMethod = namePayMethod;
 	}
 	public String getStatus() {
 		return status;

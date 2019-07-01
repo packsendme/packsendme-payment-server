@@ -30,7 +30,7 @@ public class PaymentMethodService {
 		PaymentMethodModel entity = new PaymentMethodModel();
 		Response<PaymentMethodModel> responseObj = new Response<PaymentMethodModel>(HttpExceptionPackSend.CREATE_PAYMENT.getAction(), null);
 		try {
-			entity.setName(namePayMethod);
+			entity.setNamePayMethod(namePayMethod);
 			entity.setStatus(MicroservicesConstants.STATUS_ACTIVE);
 			methodPaymentDAO.add(entity); 
 			return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
@@ -45,10 +45,10 @@ public class PaymentMethodService {
 		PaymentMethodModel entity = new PaymentMethodModel();
 		Response<PaymentMethodModel> responseObj = new Response<PaymentMethodModel>(HttpExceptionPackSend.UPDATE_USERNAME.getAction(), entity);
 		try {
-			entity.setName(namePayMethodOld);
+			entity.setNamePayMethod(namePayMethodOld);
 			PaymentMethodModel payMethod = methodPaymentDAO.find(entity);
 			if(payMethod != null) {
-				payMethod.setName(namePayMethod);
+				payMethod.setNamePayMethod(namePayMethod);
 				payMethod.setStatus(status);
 				entity = methodPaymentDAO.update(payMethod);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -75,7 +75,7 @@ public class PaymentMethodService {
 			}
 			else{
 				Response<PaymentMethodModel> responseObj = new Response<PaymentMethodModel>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
-				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (MongoClientException e ) {
@@ -90,7 +90,7 @@ public class PaymentMethodService {
 		PaymentMethodModel entity = new PaymentMethodModel();
 		Response<PaymentMethodModel> responseObj = new Response<PaymentMethodModel>(HttpExceptionPackSend.ACCOUNT_DELETE.getAction(), entity);
 		try {
-			entity.setName(payName);
+			entity.setNamePayMethod(payName);
 			entity = methodPaymentDAO.find(entity);
 
 			if(entity != null) {
