@@ -68,7 +68,7 @@ public class PaymentMethodService {
 		PaymentDTO paymentDTO = new PaymentDTO();
 		try {
 			payMethodL = methodPaymentDAO.findAll();
-			if(payMethodL.size() > 1){
+			if(payMethodL.size() >= 1){
 				paymentDTO.setPayment(payMethodL);
 				Response<PaymentDTO> responseObj = new Response<PaymentDTO>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), paymentDTO);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
