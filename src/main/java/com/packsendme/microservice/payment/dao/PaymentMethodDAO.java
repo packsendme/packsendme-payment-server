@@ -47,7 +47,6 @@ public class PaymentMethodDAO implements IPaymentMongo<PaymentMethodModel> {
 		List<PaymentMethodModel> payMethodObj = new ArrayList<PaymentMethodModel>();
 		try {
 			payMethodObj = paymentRepository.findAllPaymentMethodByActived(MicroservicesConstants.STATUS_ACTIVE);
-			System.out.println("TAMANHO PAY LIST "+ payMethodObj.size());
 			return payMethodObj;
 		}
 		catch (MongoClientException e ) {

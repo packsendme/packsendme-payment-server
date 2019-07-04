@@ -2,7 +2,6 @@ package com.packsendme.microservice.payment.repository;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "PaymentMethod")
@@ -14,6 +13,7 @@ public class PaymentMethodModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String namePayMethod;
+	private String typePayMethod;
 	private String status;
 	
 	
@@ -31,6 +31,12 @@ public class PaymentMethodModel implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getTypePayMethod() {
+		return typePayMethod;
+	}
+	public void setTypePayMethod(String typePayMethod) {
+		this.typePayMethod = typePayMethod;
 	}
 	
 	
