@@ -14,6 +14,7 @@ import com.packsendme.lib.common.constants.HttpExceptionPackSend;
 import com.packsendme.lib.common.constants.MicroservicesConstants;
 import com.packsendme.lib.common.response.Response;
 import com.packsendme.microservice.payment.dao.PaymentMethodDAO;
+import com.packsendme.microservice.payment.dto.CardPayDto;
 import com.packsendme.microservice.payment.dto.PaymentDTO;
 import com.packsendme.microservice.payment.repository.PaymentMethodModel;
 
@@ -103,6 +104,27 @@ public class PaymentMethodService {
 		}
 		catch (MongoClientException e ) {
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
+	public ResponseEntity<?> getValidationCardEntity(CardPayDto cardPayDto) throws Exception {
+		try {
+			boolean resultValidation = true;
+
+			if(resultValidation == true){
+				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), cardPayDto);
+				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+			}
+			else{
+				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+			}
+		}
+		catch (MongoClientException e ) {
+			e.printStackTrace();
+			Response<CardPayDto> responseErrorObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
+			return new ResponseEntity<>(responseErrorObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
