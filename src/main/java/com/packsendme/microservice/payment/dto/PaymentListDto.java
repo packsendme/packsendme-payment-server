@@ -2,7 +2,7 @@ package com.packsendme.microservice.payment.dto;
 
 import java.util.List;
 
-public class PaymentDTO{
+public class PaymentListDto{
 
 	public List<?> payment;
 	

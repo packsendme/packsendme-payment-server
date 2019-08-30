@@ -15,7 +15,8 @@ import com.packsendme.lib.common.constants.MicroservicesConstants;
 import com.packsendme.lib.common.response.Response;
 import com.packsendme.microservice.payment.dao.PaymentMethodDAO;
 import com.packsendme.microservice.payment.dto.CardPayDto;
-import com.packsendme.microservice.payment.dto.PaymentDTO;
+import com.packsendme.microservice.payment.dto.PaymentDto;
+import com.packsendme.microservice.payment.dto.PaymentListDto;
 import com.packsendme.microservice.payment.repository.PaymentMethodModel;
 
 @Service
@@ -66,12 +67,12 @@ public class PaymentMethodService {
 	
 	public ResponseEntity<?> getPaymentMethodActived() throws Exception {
 		List<PaymentMethodModel> payMethodL = new ArrayList<PaymentMethodModel>();
-		PaymentDTO paymentDTO = new PaymentDTO();
+		PaymentListDto paymentDTO = new PaymentListDto();
 		try {
 			payMethodL = methodPaymentDAO.findAll();
 			if(payMethodL.size() >= 1){
 				paymentDTO.setPayment(payMethodL);
-				Response<PaymentDTO> responseObj = new Response<PaymentDTO>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), paymentDTO);
+				Response<PaymentListDto> responseObj = new Response<PaymentListDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), paymentDTO);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else{
@@ -108,16 +109,16 @@ public class PaymentMethodService {
 	}
 	
 	
-	public ResponseEntity<?> getValidationCardEntity(CardPayDto cardPayDto) throws Exception {
+	public ResponseEntity<?> getValidationCardEntity(PaymentDto cardPayDto) throws Exception {
 		try {
 			boolean resultValidation = true;
 
 			if(resultValidation == true){
-				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), cardPayDto);
+				Response<PaymentDto> responseObj = new Response<PaymentDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), cardPayDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else{
-				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+				Response<PaymentDto> responseObj = new Response<PaymentDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
