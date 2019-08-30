@@ -109,16 +109,16 @@ public class PaymentMethodService {
 	}
 	
 	
-	public ResponseEntity<?> getValidationCardEntity(PaymentDto cardPayDto) throws Exception {
+	public ResponseEntity<?> getValidationCardEntity(CardPayDto cardPayDto) throws Exception {
 		try {
 			boolean resultValidation = true;
 
 			if(resultValidation == true){
-				Response<PaymentDto> responseObj = new Response<PaymentDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), cardPayDto);
+				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), cardPayDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else{
-				Response<PaymentDto> responseObj = new Response<PaymentDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
