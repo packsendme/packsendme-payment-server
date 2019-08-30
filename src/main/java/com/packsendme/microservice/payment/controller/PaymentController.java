@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.packsendme.microservice.payment.dto.CardPayDto;
+import com.packsendme.microservice.payment.dto.PaymentDto;
 import com.packsendme.microservice.payment.service.PaymentMethodService;
 
 @RestController
@@ -44,7 +45,7 @@ public class PaymentController {
 	//** BEGIN OPERATION: CARD VALIDATE  *************************************************//
 
 	@GetMapping("/payment/card/validate/")
-	public ResponseEntity<?> validateCreditCard(@Validated @RequestBody CardPayDto cardpayDto) throws Exception {
+	public ResponseEntity<?> validateCreditCard(@Validated @RequestBody PaymentDto cardpayDto) throws Exception {
 		return methodPayService.getValidationCardEntity(cardpayDto);
 	}
 
