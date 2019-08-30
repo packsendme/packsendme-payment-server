@@ -45,7 +45,7 @@ public class PaymentController {
 	//** BEGIN OPERATION: CARD VALIDATE  *************************************************//
 
 	@GetMapping("/payment/card/validate/")
-	public ResponseEntity<?> validateCreditCard(@Validated @RequestBody PaymentDto cardpayDto) throws Exception {
+	public ResponseEntity<?> validateCreditCard(@Validated @RequestBody CardPayDto cardpayDto) throws Exception {
 		return methodPayService.getValidationCardEntity(cardpayDto);
 	}
 
