@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.packsendme.microservice.payment.dto.CardPayDto;
 import com.packsendme.microservice.payment.service.PaymentMethodService;
 
 @RestController
@@ -39,7 +41,12 @@ public class PaymentController {
 	}
 	
 	
-	//** BEGIN OPERATION: PAYMENT  *************************************************//
+	//** BEGIN OPERATION: CARD VALIDATE  *************************************************//
+
+	@GetMapping("/payment/card/validate/")
+	public ResponseEntity<?> validateCreditCard(@Validated @RequestBody CardPayDto cardpayDto) throws Exception {
+		return methodPayService.getValidationCardEntity(cardpayDto);
+	}
 
 
 }
