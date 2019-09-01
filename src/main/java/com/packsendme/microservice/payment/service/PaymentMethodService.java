@@ -15,8 +15,8 @@ import com.packsendme.lib.common.constants.MicroservicesConstants;
 import com.packsendme.lib.common.response.Response;
 import com.packsendme.microservice.payment.dao.PaymentMethodDAO;
 import com.packsendme.microservice.payment.dto.CardPayDto;
-import com.packsendme.microservice.payment.dto.PaymentDto;
 import com.packsendme.microservice.payment.dto.PaymentListDto;
+import com.packsendme.microservice.payment.dto.ResultValidationCardDto;
 import com.packsendme.microservice.payment.repository.PaymentMethodModel;
 
 @Service
@@ -109,17 +109,22 @@ public class PaymentMethodService {
 	}
 	
 	
-	public ResponseEntity<?> getValidationCardEntity(CardPayDto cardPayDto) throws Exception {
+	public ResponseEntity<?> getValidationCardEntity(String payCodenum,String payCountry,String payEntity,String payValue,String payExpiry) throws Exception {
 		try {
-			boolean resultValidation = true;
+			/// Call Entity Card Validation
 
-			if(resultValidation == true){
-				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), cardPayDto);
-				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+			ResultValidationCardDto resultCardObj = new ResultValidationCardDto();
+			PaymentValidationCardMock payMock = new PaymentValidationCardMock(); 
+			
+			if(payValue == "000"){
+				resultCardObj = payMock.testValidation_Fail();
+				Response<ResultValidationCardDto> responseObj = new Response<ResultValidationCardDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), resultCardObj);
+				return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 			}
 			else{
-				Response<CardPayDto> responseObj = new Response<CardPayDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
-				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+				resultCardObj = payMock.testValidation_OK();
+				Response<ResultValidationCardDto> responseObj = new Response<ResultValidationCardDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), resultCardObj);
+				return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 			}
 		}
 		catch (MongoClientException e ) {
@@ -128,5 +133,9 @@ public class PaymentMethodService {
 			return new ResponseEntity<>(responseErrorObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	
+
+
 	
 }

@@ -7,11 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.packsendme.microservice.payment.dto.CardPayDto;
-import com.packsendme.microservice.payment.dto.PaymentDto;
 import com.packsendme.microservice.payment.service.PaymentMethodService;
 
 @RestController
@@ -44,9 +40,21 @@ public class PaymentController {
 	
 	//** BEGIN OPERATION: CARD VALIDATE  *************************************************//
 
-	@PostMapping("/payment/card/validate/")
-	public ResponseEntity<?> validateCreditCard(@Validated @RequestBody CardPayDto cardpayDto) throws Exception {
-		return methodPayService.getValidationCardEntity(cardpayDto);
+	/* (payCodenum:cardPaymentDto.payCodenum!, 
+	payCountry:cardPaymentDto.payCountry!,
+	payEntity:cardPaymentDto.payEntity!, 
+	payExpiry:cardPaymentDto.payExpiry!, 
+	payValue:cardPaymentDto.payValue!) */
+	
+	
+	@GetMapping("/payment/card/validate/{payCodenum}/{payCountry}/{payEntity}/{payValue}/{payExpiry}")
+	public ResponseEntity<?> validateCreditCard(
+			@Validated @PathVariable ("payCodenum") String payCodenum,
+			@Validated @PathVariable ("payCountry") String payCountry,
+			@Validated @PathVariable ("payEntity") String payEntity,
+			@Validated @PathVariable ("payValue") String payValue,
+			@Validated @PathVariable ("payExpiry") String payExpiry) throws Exception {
+		return methodPayService.getValidationCardEntity(payCodenum,payCountry,payEntity,payValue,payExpiry);
 	}
 
 
