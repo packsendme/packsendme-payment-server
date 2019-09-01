@@ -1,6 +1,6 @@
 package com.packsendme.microservice.payment.service;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.stereotype.Component;
 
 import com.packsendme.microservice.payment.dto.ResultValidationCardDto;
