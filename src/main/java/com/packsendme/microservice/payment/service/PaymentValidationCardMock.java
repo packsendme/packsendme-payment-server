@@ -1,6 +1,5 @@
 package com.packsendme.microservice.payment.service;
 
-import org.junit.Test;
 import org.springframework.stereotype.Component;
 
 import com.packsendme.microservice.payment.dto.ResultValidationCardDto;
@@ -8,7 +7,6 @@ import com.packsendme.microservice.payment.dto.ResultValidationCardDto;
 @Component
 public class PaymentValidationCardMock {
 
-	@Test
 	public ResultValidationCardDto testValidation_OK() {
 		ResultValidationCardDto resultCardSuccess = new ResultValidationCardDto();
 		resultCardSuccess.setCod("100");
@@ -16,7 +14,6 @@ public class PaymentValidationCardMock {
 		return resultCardSuccess;
 	}
 
-	@Test
 	public ResultValidationCardDto testValidation_Fail() {
 		ResultValidationCardDto resultCardError = new ResultValidationCardDto();
 		resultCardError.setCod("-100");
