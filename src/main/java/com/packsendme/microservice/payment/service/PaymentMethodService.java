@@ -27,7 +27,7 @@ public class PaymentMethodService {
 			ResultValidationCardDto resultCardObj = null;
 			PaymentValidationCardMock payMock = new PaymentValidationCardMock(); 
 			
-			if(payValue == "000"){
+			if(payValue.equals("000")){
 				resultCardObj = payMock.testValidation_Fail();
 				Response<ResultValidationCardDto> responseObj = new Response<ResultValidationCardDto>(HttpExceptionPackSend.NOT_VALIDATE_CARD.value(),
 						HttpExceptionPackSend.NOT_VALIDATE_CARD.getAction(), resultCardObj);
