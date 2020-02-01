@@ -5,7 +5,7 @@ pipeline {
         NAME_CONTAINER = "psm-core-payment"
         NAME_IMAGE = "microservice-core-payment:1"
         ID_CONTAINER = null 
-        PORT_CONTAINER = "9095:9095"
+        PORT_CONTAINER = "9096:9096"
     }
 
     stages {
