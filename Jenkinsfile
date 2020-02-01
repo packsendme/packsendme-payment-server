@@ -25,7 +25,7 @@ pipeline {
         stage("Docker Delopy - Check Container") {
             steps {
                 script {
-                    ID_CONTAINER = sh(script: "docker ps -f name=${NAME_CONTAINER} --format {{.ID}}", returnStdout: true).trim()
+                    ID_CONTAINER = sh(script: "docker ps -a -f name=${NAME_CONTAINER} --format {{.ID}}", returnStdout: true).trim()
                     echo "Deploy PR #${ID_CONTAINER}"
                 }
             }
