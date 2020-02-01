@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        NAME_CONTAINER = "psm-core-payment"
-        NAME_IMAGE = "microservice-core-payment:1"
+        NAME_CONTAINER = "payment-microservice-psm"
+        NAME_IMAGE = "payment-image-psm:1"
         ID_CONTAINER = null 
         PORT_CONTAINER = "9096:9096"
     }
